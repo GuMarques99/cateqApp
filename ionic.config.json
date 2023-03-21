@@ -1,0 +1,7 @@
+{
+  "name": "cateqApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
