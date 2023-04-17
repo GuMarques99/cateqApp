@@ -11,8 +11,9 @@ import { IonicModule } from '@ionic/angular';
 })
 export class AppComponent {
   public appPages = [
-    { title: 'Categoria', url: '/categoria', icon: 'mail' },
+    { title: 'Login', url: '/login', icon: 'login' },
+    { title: 'Registro', url: '/cadastro-usuario', icon: 'user' },
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
+  public labels = ['TESTE', 'TESTE', 'TESTE', 'TESTE', 'TESTE', 'TESTE'];
   constructor() {}
 }
