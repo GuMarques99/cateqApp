@@ -5,6 +5,7 @@ import { IonicModule, ModalController } from '@ionic/angular';
 
 import { Turma, statusTurma } from '../models/turma.model';
 import { TurmasService } from '../services/turmas.service';
+import { CadastroTurmasPage } from '../cadastro-turmas/cadastro-turmas.page';
 
 @Component({
   selector: 'turmas',
@@ -16,7 +17,9 @@ import { TurmasService } from '../services/turmas.service';
 export class TurmasPage implements OnInit {
   public listaTurmas: Turma[] = [];
 
-  constructor(private turmasServ: TurmasService) { }
+  constructor(
+    private turmasServ: TurmasService, 
+    private modalCtrl: ModalController) { }
 
   ngOnInit() {
     this.listarTurmas();
@@ -28,8 +31,33 @@ export class TurmasPage implements OnInit {
     }) 
   }
 
-  public adicionar() {
-    
+  public async adicionar() {
+    const modal = await this.modalCtrl.create({
+      component: CadastroTurmasPage
+    })
+
+    modal.onDidDismiss().then(() => {
+      this.listarTurmas();
+      console.log(this.listaTurmas)
+    })
+
+    return await modal.present();
+  }
+
+  public async editar(turma: Turma) {
+    const modal = await this.modalCtrl.create({
+      component: CadastroTurmasPage,
+      componentProps: {
+        turma: turma,
+        edicao: true
+      }
+    })
+
+    modal.onDidDismiss().then(() => {
+      this.listarTurmas()
+    })
+
+    return await modal.present();
   }
 
   public statusBadgeColor(status: statusTurma): string {
