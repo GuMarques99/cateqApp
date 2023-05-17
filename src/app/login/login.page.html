@@ -1,14 +1,12 @@
 
-<ion-header [translucent]="true">
-    <a href="/folder/inbox">
-    <ion-icon  size="large" class="ion-padding" name="return-up-back-outline" style="color:black"></ion-icon>
-  </a>
-</ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large" style="color: black !important;">login</ion-title>
+      <a href="/folder/inbox">
+        <ion-icon  size="large" slot="start" class="ion-padding" name="return-up-back-outline" style="color:black"></ion-icon>
+      </a>
+      <ion-title size="large" style="color: black !important;" slot="center">Login</ion-title>      
     </ion-toolbar>
   </ion-header>
   <ion-item  class="item-lines-none">

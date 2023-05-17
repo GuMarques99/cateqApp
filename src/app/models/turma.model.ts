@@ -16,3 +16,17 @@ export enum statusTurma {
     finalizada = "Finalizada",
     cancelada = "Cancelada"
 }
+
+export function novaTurma(): Turma  {
+    return {
+        id: '',
+        apelido: '',
+        descricao: '',
+        dataInicio: undefined,
+        dataConclusao: undefined,
+        dataPrevEncerramento: undefined,
+        dataCadastro: new Date(Date.now()),
+        responsavel: '',
+        status: statusTurma.pendente
+    }
+}
