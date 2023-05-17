@@ -7,22 +7,26 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+  <ion-header>
     <ion-toolbar>
       <ion-title size="large" style="color: black !important;">Registro</ion-title>
     </ion-toolbar>
   </ion-header>
+  <form>
+
+
   <ion-item  class="item-lines-none">
-    <ion-input class="ion-margin" name="login" placeholder="Digite um Email" type="Email"></ion-input>
+    <ion-input class="ion-margin" name="login" placeholder="Digite um Email" type="Email" [(ngModel)]="usuario.login"></ion-input>
   </ion-item>
   <ion-item  class="item-lines-none">
-    <ion-input class="ion-margin" name="senha" placeholder="Digite uma senha"></ion-input>
+    <ion-input class="ion-margin" name="senha" placeholder="Digite uma senha" [(ngModel)]="usuario.senha"></ion-input>
   </ion-item>
   <ion-item  class="item-lines-none">
-    <ion-input class="ion-margin" name="senharep" placeholder="Repita a senha"></ion-input>
+    <ion-input class="ion-margin" name="senharep" placeholder="Repita a senha" [(ngModel)]="usuario.senhaCheck"></ion-input>
   </ion-item>
-<ion-button class="ion-button ion-margin" expand="block" fill="clear" shape="round">
+<ion-button class="ion-button ion-margin"(click)="registrar()" expand="block" fill="clear" shape="round">
   Salvar
 </ion-button>
+</form>
 
 </ion-content>
