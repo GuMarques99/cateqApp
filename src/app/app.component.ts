@@ -13,6 +13,7 @@ export class AppComponent {
   public appPages = [
     { title: 'Login', url: '/login', icon: 'login' },
     { title: 'Registro', url: '/cadastro-usuario', icon: 'user' },
+    { title: 'Turmas', url: '/turmas',icon: 'user'}
   ];
   public labels = ['TESTE', 'TESTE', 'TESTE', 'TESTE', 'TESTE', 'TESTE'];
   constructor() {}
