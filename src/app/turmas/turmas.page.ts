@@ -5,6 +5,7 @@ import { IonicModule, ModalController } from '@ionic/angular';
 
 import { Turma, statusTurma } from '../models/turma.model';
 import { TurmasService } from '../services/turmas.service';
+import { CadastroTurmasPage } from '../cadastro-turmas/cadastro-turmas.page';
 
 @Component({
   selector: 'turmas',
@@ -14,56 +15,49 @@ import { TurmasService } from '../services/turmas.service';
   imports: [IonicModule, CommonModule, FormsModule]
 })
 export class TurmasPage implements OnInit {
-  public listaTurmas: Turma[] = /*[];
-  public turmasFixas: Turma[] =*/ [
-  {
-    id: '1',
-    apelido: 'Turma 1',
-    descricao: 'Descrição da Turma 1',
-    dataInicio: new Date('2023-04-01'),
-    dataConclusao: new Date('2023-05-01'),
-    dataPrevEncerramento: new Date('2023-06-01'),
-    dataCadastro: new Date(),
-    responsavel: 'Responsável 1',
-    status: statusTurma.pendente
-  },
-  {
-    id: '2',
-    apelido: 'Turma 2',
-    descricao: 'Descrição da Turma 2',
-    dataInicio: new Date('2023-04-02'),
-    dataConclusao: new Date('2023-05-02'),
-    dataPrevEncerramento: new Date('2023-06-02'),
-    dataCadastro: new Date(),
-    responsavel: 'Responsável 2',
-    status: statusTurma.emAndamento
-  },
-  {
-    id: '3',
-    apelido: 'Turma 3',
-    descricao: 'Descrição da Turma 3',
-    dataInicio: new Date('2023-04-03'),
-    dataConclusao: new Date('2023-05-03'),
-    dataPrevEncerramento: new Date('2023-06-03'),
-    dataCadastro: new Date(),
-    responsavel: 'Responsável 3',
-    status: statusTurma.finalizada
-  },
-  // Adicione os outros elementos da mesma forma
-];
+  public listaTurmas: Turma[] = [];
 
-  constructor(/*private turmasServ: TurmasService*/) { }
+  constructor(
+    private turmasServ: TurmasService, 
+    private modalCtrl: ModalController) { }
 
   ngOnInit() {
     this.listarTurmas();
   }
 
   public listarTurmas() {
-    //.turmasServ.carregar().then((turmas) => {
-    //  this.listaTurmas = turmas
-    //}).then(() => {
-      //this.listaTurmas.concat(this.turmasFixas);
-    //});
+    this.turmasServ.carregar().then((turmas) => {
+      this.listaTurmas = turmas
+    }) 
+  }
+
+  public async adicionar() {
+    const modal = await this.modalCtrl.create({
+      component: CadastroTurmasPage
+    })
+
+    modal.onDidDismiss().then(() => {
+      this.listarTurmas();
+      console.log(this.listaTurmas)
+    })
+
+    return await modal.present();
+  }
+
+  public async editar(turma: Turma) {
+    const modal = await this.modalCtrl.create({
+      component: CadastroTurmasPage,
+      componentProps: {
+        turma: turma,
+        edicao: true
+      }
+    })
+
+    modal.onDidDismiss().then(() => {
+      this.listarTurmas()
+    })
+
+    return await modal.present();
   }
 
   public statusBadgeColor(status: statusTurma): string {

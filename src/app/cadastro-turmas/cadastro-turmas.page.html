@@ -10,14 +10,67 @@
 </ion-header>
 <!--<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>cadastroTurmas</ion-title>
+    <ion-title>{{titulo}}</ion-title>
+    <ion-icon 
+      class="ion-padding" size="large" 
+      slot="end" name="close" 
+      (click)="dismiss()">
+    </ion-icon>
   </ion-toolbar>
 </ion-header>-->
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">cadastroTurmas</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-card>
+    <ion-item>
+      <ion-label>Apelido: </ion-label>
+      <ion-textarea aria-placeholder="Apelido da turma"
+        [(ngModel)]="turma.apelido">
+      </ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <!-- <ion-label>Descrição</ion-label> -->
+      <ion-textarea label="Descrição" [(ngModel)]="turma.descricao"></ion-textarea>
+      <!-- <ion-input type="text" [ngModel]="turma.descricao"></ion-input> -->
+    </ion-item>  
+
+    <ion-item *ngIf="edicao">
+      <ion-label>Status</ion-label>
+      <ion-select [(ngModel)]="turma.status" multiple="false" value="turma.status" placeholder="Selecione">
+        <ion-select-option value="Pendente">Pendente (Não iniciada)</ion-select-option>
+        <ion-select-option value="Em Andamento">Em andamento</ion-select-option>
+        <ion-select-option value="Finalizada">Finalizada</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon slot="start" name="calendar-outline"></ion-icon>
+      <ion-label>Data de início</ion-label>
+      <ion-item>
+        <ion-label>Data</ion-label>
+        <ion-datetime presentation="date" [(ngModel)]="turma.dataInicio"></ion-datetime>
+      </ion-item>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon slot="start" name="calendar-outline"></ion-icon>
+      <ion-label>Data prevista de encerramento</ion-label>
+      <ion-item>
+        <ion-label>Data</ion-label>
+        <ion-datetime presentation="date" [(ngModel)]="turma.dataPrevEncerramento"></ion-datetime>
+      </ion-item>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Responsável</ion-label>
+      <ion-input type="text" [(ngModel)]="turma.responsavel"></ion-input>
+    </ion-item>  
+
+    <ion-button (click)="salvar()" expand="block" shape="round">
+      <ion-icon slot="start" name="save">Salvar</ion-icon>
+    </ion-button>
+
+  </ion-card>
+
+
 </ion-content>
