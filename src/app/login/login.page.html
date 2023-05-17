@@ -1,23 +1,26 @@
 
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+  <ion-header  [translucent]="true">
     <ion-toolbar>
-      <a href="/folder/inbox">
-        <ion-icon  size="large" slot="start" class="ion-padding" name="return-up-back-outline" style="color:black"></ion-icon>
-      </a>
-      <ion-title size="large" style="color: black !important;" slot="center">Login</ion-title>      
     </ion-toolbar>
   </ion-header>
   <ion-item  class="item-lines-none">
-    <ion-input class="ion-margin" name="login" placeholder="Email" type="Email"></ion-input>
+    <ion-input class="ion-margin" name="login" placeholder="Email" type="Email" [(ngModel)]="usuario.login"></ion-input>
   </ion-item>
   <ion-item  class="item-lines-none">
-    <ion-input class="ion-margin" name="senha" placeholder="Senha"></ion-input>
+    <ion-input class="ion-margin" name="senha" placeholder="Senha"  [(ngModel)]="usuario.senha"></ion-input>
   </ion-item>
 
-  <ion-button   class="ion-button ion-margin" expand="block" fill="clear" shape="round">
+  <ion-button   class="ion-button ion-margin" expand="block" fill="clear" shape="round" (click)="logar()">
     Entrar
   </ion-button>
-
+  <ion-alert
+  [isOpen]="isAlertOpen"
+  header="Aviso"
+  subHeader="Acesso negado!"
+  message="Login e senha incorreto!"
+  [buttons]="alertButtons"
+  (didDismiss)="setOpen(false)"
+></ion-alert>
 </ion-content>

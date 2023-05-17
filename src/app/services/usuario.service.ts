@@ -34,6 +34,7 @@ import { Usuario } from "../models/usuario.model";
   
     public add(user: Usuario): Usuario {
         this.usuarios.push(user); 
+        console.log(this.usuarios);
         return user;    
     }
 
