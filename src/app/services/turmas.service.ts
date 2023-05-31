@@ -1,5 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Storage } from '@ionic/storage';
+import { Firestore, 
+  getFirestore, collection, doc, 
+  getDocs, getDoc, addDoc, setDoc, deleteDoc, Timestamp
+} from 'firebase/firestore';
+import { FirebaseService } from './firebase.service';
+
+
 import { Turma, statusTurma } from '../models/turma.model';
 
 @Injectable({
@@ -42,11 +48,53 @@ export class TurmasService {
     },
     // Adicione os outros elementos da mesma forma
   ];
-  constructor() { 
+  
+  private firestoreDB: Firestore;
+
+  constructor(private fireServ: FirebaseService) {
+    this.firestoreDB = getFirestore(this.fireServ.getApp());
   }
 
-  public async adicionar(novaTurma: Turma){
-    this.turmas.push(novaTurma);
+  public async getAll(): Promise<Turma[]> {
+    const turmasCol = collection(
+      this.firestoreDB, 'turmas');
+
+    const turmasSnapshot = await getDocs(turmasCol);
+    const turmasList: Turma[] = turmasSnapshot.docs
+                          .map(
+                              (doc)=>{
+                                const docData = {...doc.data()};
+                                console.log(docData);
+                                return {
+                                  id: doc.id,
+                                  apelido: docData['apelido'],
+                                  descricao: docData['descricao'],
+                                  dataInicio: docData['dataInicio'].toDate(),
+                                  dataConclusao: docData['dataConclusao'] ? docData['dataConclusao'].toDate() : null,
+                                  dataPrevEncerramento: docData['dataPrevEncerramento'].toDate(),
+                                  dataCadastro: docData['dataCadastro'].toDate(),
+                                  responsavel: docData['responsavel'],
+                                  status: docData['status']
+                                }
+                              }
+                          );
+
+    return turmasList;
+  }
+
+  public async adicionar(turma: Turma) {
+    // @ts-ignore
+    delete turma.id;
+    delete turma.dataConclusao;
+    const dataInicioTimestamp = Timestamp.fromMillis(turma.dataInicio!.getTime() / 1000);
+    const docRef = await addDoc(collection(this.firestoreDB,'turmas'), 
+                      {
+                        ...turma,
+                        dataInicio: dataInicioTimestamp
+                      }
+                    );
+
+    return docRef;    
   }
 
   public async deletar(id: string){

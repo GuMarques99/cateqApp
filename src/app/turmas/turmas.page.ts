@@ -26,7 +26,7 @@ export class TurmasPage implements OnInit {
   }
 
   public listarTurmas() {
-    this.turmasServ.carregar().then((turmas) => {
+    this.turmasServ.getAll().then((turmas) => {
       this.listaTurmas = turmas
     }) 
   }
