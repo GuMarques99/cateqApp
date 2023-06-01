@@ -16,6 +16,6 @@ export class AppComponent {
     { title: 'Turmas', url: '/turmas',icon: 'user'},
     { title: 'Cadastro de Aluno', url: '/cadastro-aluno',icon: 'user'}
   ];
-  public labels = ['Notificação', 'Notificação', 'Notificação', 'Notificação', 'Notificação', 'Notificação'];
+  public labels = [];
   constructor() {}
 }

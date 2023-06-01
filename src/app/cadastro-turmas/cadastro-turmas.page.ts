@@ -16,6 +16,8 @@ export class CadastroTurmasPage implements OnInit {
   public titulo = "Cadastrar turma";
   public edicao = false;
   public turma = novaTurma();
+  public maxDateLimit = new Date();
+
   constructor(
     private turmaServ: TurmasService,
     private modalCtrl: ModalController) { 
@@ -25,6 +27,8 @@ export class CadastroTurmasPage implements OnInit {
   ngOnInit() {
     if(this.edicao)
       this.titulo = "Editar turma"
+
+    this.maxDateLimit.setFullYear(this.maxDateLimit.getFullYear() + 4);
   }
 
   public salvar(){

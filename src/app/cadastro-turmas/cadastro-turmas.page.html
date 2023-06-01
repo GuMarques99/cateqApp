@@ -1,42 +1,27 @@
 <ion-header _ngcontent-vlf-c84="" ng-reflect-translucent="true" role="banner" class="md header-md header-translucent header-collapse-none header-translucent-md hydrated"><!---->
-  <ion-toolbar _ngcontent-vlf-c84="" class="toolbar-title-default md in-toolbar hydrated">
-    <ion-buttons _ngcontent-vlf-c84="" slot="start" class="buttons-first-slot sc-ion-buttons-md-h sc-ion-buttons-md-s md hydrated">
-      <ion-menu-button _ngcontent-vlf-c84="" class="md button in-toolbar ion-activatable ion-focusable hydrated">
-      </ion-menu-button>
-    </ion-buttons>
-    <ion-title _ngcontent-vlf-c84="" class="md title-default hydrated">cadastroTurmas
+  <ion-toolbar _ngcontent-vlf-c84="" class="toolbar-title-default md in-toolbar hydrated">    
+    <ion-title _ngcontent-vlf-c84="" class="md title-default hydrated"> Cadastro Turmas
     </ion-title>
-  </ion-toolbar>
-</ion-header>
-<!--<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>{{titulo}}</ion-title>
     <ion-icon 
       class="ion-padding" size="large" 
       slot="end" name="close" 
       (click)="dismiss()">
     </ion-icon>
   </ion-toolbar>
-</ion-header>-->
-
+</ion-header>
 <ion-content [fullscreen]="true">
-  <ion-card>
-    <ion-item>
-      <ion-label>Apelido: </ion-label>
-      <ion-textarea aria-placeholder="Apelido da turma"
-        [(ngModel)]="turma.apelido">
-      </ion-textarea>
+  <ion-card class="ion-margin-top ion-margin-bottom">
+    <ion-item class="ion-margin-top">
+      <ion-input aria-placeholder="Apelido da turma" [(ngModel)]="turma.apelido" label="Apelido" label-placement="stacked">
+      </ion-input>
     </ion-item>
 
     <ion-item>
-      <!-- <ion-label>Descrição</ion-label> -->
-      <ion-textarea label="Descrição" [(ngModel)]="turma.descricao"></ion-textarea>
-      <!-- <ion-input type="text" [ngModel]="turma.descricao"></ion-input> -->
+      <ion-textarea label="Descrição" label-placement="stacked" [(ngModel)]="turma.descricao"></ion-textarea>
     </ion-item>  
 
     <ion-item *ngIf="edicao">
-      <ion-label>Status</ion-label>
-      <ion-select [(ngModel)]="turma.status" multiple="false" value="turma.status" placeholder="Selecione">
+      <ion-select [(ngModel)]="turma.status" multiple="false" value="turma.status" placeholder="Selecione" label="Status" label-placement="stacked">
         <ion-select-option value="Pendente">Pendente (Não iniciada)</ion-select-option>
         <ion-select-option value="Em Andamento">Em andamento</ion-select-option>
         <ion-select-option value="Finalizada">Finalizada</ion-select-option>
@@ -44,30 +29,72 @@
     </ion-item>
 
     <ion-item>
-      <ion-icon slot="start" name="calendar-outline"></ion-icon>
-      <ion-label>Data de início</ion-label>
-      <ion-item>
-        <ion-label>Data</ion-label>
-        <ion-datetime presentation="date" [(ngModel)]="turma.dataInicio"></ion-datetime>
-      </ion-item>
+      <ion-input type="text" [(ngModel)]="turma.responsavel" label="Responsável" label-placement="stacked"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-icon slot="start" name="calendar-outline"></ion-icon>
-      <ion-label>Data prevista de encerramento</ion-label>
-      <ion-item>
-        <ion-label>Data</ion-label>
-        <ion-datetime presentation="date" [(ngModel)]="turma.dataPrevEncerramento"></ion-datetime>
-      </ion-item>
+      <ion-grid [fixed]="true" class="ion-margin-bottom">
+        <ion-row>          
+          <ion-col>
+            <ion-label><ion-icon slot="start" name="calendar-outline"></ion-icon> Data Início</ion-label>          
+          </ion-col>
+        </ion-row>
+        <ion-row>          
+          <ion-col>
+            <ion-datetime-button datetime="dataInicio"></ion-datetime-button>          
+          </ion-col>
+        </ion-row>  
+        <ion-modal [keepContentsMounted]="true">
+            <ng-template>
+              <ion-datetime id="dataInicio" [(ngModel)]="turma.dataInicio" presentation="date" ></ion-datetime>
+            </ng-template>
+          </ion-modal>
+        </ion-grid>
     </ion-item>
 
-    <ion-item>
-      <ion-label>Responsável</ion-label>
-      <ion-input type="text" [(ngModel)]="turma.responsavel"></ion-input>
-    </ion-item>  
+    <ion-item *ngIf="turma.status != 'Finalizada'">      
+      <ion-grid [fixed]="true" class="ion-margin-bottom">
+        <ion-row>          
+          <ion-col>
+            <ion-label><ion-icon slot="start" name="calendar-outline"></ion-icon> Prev. Encerramento</ion-label>          
+          </ion-col>
+        </ion-row>
+        <ion-row>          
+          <ion-col>
+            <ion-datetime-button datetime="dataEnc"></ion-datetime-button>          
+          </ion-col>
+        </ion-row>  
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime id="dataEnc" [(ngModel)]="turma.dataPrevEncerramento" presentation="month-year" min="{{turma.dataInicio}}" max="2100-05-31T23:59:59"></ion-datetime>
+          </ng-template>
+        </ion-modal>
+      </ion-grid>
+    </ion-item>
 
-    <ion-button (click)="salvar()" expand="block" shape="round">
-      <ion-icon slot="start" name="save">Salvar</ion-icon>
+    <ion-item *ngIf="turma.status == 'Finalizada'">      
+      <ion-grid [fixed]="true" class="ion-margin-bottom">
+        <ion-row>          
+          <ion-col>
+            <ion-label><ion-icon slot="start" name="calendar-outline"></ion-icon> Data Conclusão</ion-label>          
+          </ion-col>
+        </ion-row>
+        <ion-row>          
+          <ion-col>
+            <ion-datetime-button datetime="dataConclusao"></ion-datetime-button>          
+          </ion-col>
+        </ion-row>  
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime id="dataConclusao" [(ngModel)]="turma.dataConclusao" presentation="date" min="{{turma.dataInicio}}" max="2100-05-31T23:59:59"></ion-datetime>
+          </ng-template>
+        </ion-modal>
+      </ion-grid>
+    </ion-item>
+      
+
+    <ion-button (click)="salvar()" expand="block" shape="round" class="ion-margin">
+      <ion-icon slot="start" name="save">Salvar</ion-icon> 
     </ion-button>
 
   </ion-card>

@@ -38,7 +38,6 @@ export class TurmasPage implements OnInit {
 
     modal.onDidDismiss().then(() => {
       this.listarTurmas();
-      console.log(this.listaTurmas)
     })
 
     return await modal.present();
