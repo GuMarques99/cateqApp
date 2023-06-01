@@ -15,6 +15,6 @@ export class AppComponent {
     { title: 'Registro', url: '/cadastro-usuario', icon: 'user' },
     { title: 'Turmas', url: '/turmas',icon: 'user'}
   ];
-  public labels = ['TESTE', 'TESTE', 'TESTE', 'TESTE', 'TESTE', 'TESTE'];
+  public labels = [];
   constructor() {}
 }
