@@ -40,5 +40,8 @@ export class LoginPage implements OnInit {
 
 
   }
+  public registrar(){
+    this.rota.navigate(['/cadastro-usuario']);
+  }
 
 }
