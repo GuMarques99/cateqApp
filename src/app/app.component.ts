@@ -13,8 +13,9 @@ export class AppComponent {
   public appPages = [
     { title: 'Login', url: '/login', icon: 'login' },
     { title: 'Registro', url: '/cadastro-usuario', icon: 'user' },
-    { title: 'Turmas', url: '/turmas',icon: 'user'}
+    { title: 'Turmas', url: '/turmas',icon: 'user'},
+    { title: 'Cadastro de Aluno', url: '/cadastro-aluno',icon: 'user'}
   ];
-  public labels = ['TESTE', 'TESTE', 'TESTE', 'TESTE', 'TESTE', 'TESTE'];
+  public labels = ['Notificação', 'Notificação', 'Notificação', 'Notificação', 'Notificação', 'Notificação'];
   constructor() {}
 }
