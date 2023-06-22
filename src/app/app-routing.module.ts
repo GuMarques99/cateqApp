@@ -8,13 +8,25 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    path: 'folder/:id',
+    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
+  },
+
+  {
+    path: 'alunos/:id',
+    loadChildren: () => import('./alunos/alunos.module').then( m => m.alunosPageModule)
+      
   },
   {
-    path: 'turmas',
-    loadChildren: () => import('./turmas/turmas.page').then(m => m.TurmasPage)
-  }
+    path: 'professores/:id',
+    loadChildren: () => import('./professores/professores.module').then( m => m.ProfessoresPageModule)
+  },
+
+{
+path: 'turmas/:id',
+loadChildren: () => import('./turmas/turmas.module').then( m => m.TurmasPageModule)
+}
+
 ];
 
 @NgModule({

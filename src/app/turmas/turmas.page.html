@@ -1,6 +1,11 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Turmas</ion-title>
+<ion-header _ngcontent-vlf-c84="" ng-reflect-translucent="true" role="banner" class="md header-md header-translucent header-collapse-none header-translucent-md hydrated"><!---->
+  <ion-toolbar _ngcontent-vlf-c84="" class="toolbar-title-default md in-toolbar hydrated">
+    <ion-buttons _ngcontent-vlf-c84="" slot="start" class="buttons-first-slot sc-ion-buttons-md-h sc-ion-buttons-md-s md hydrated">
+      <ion-menu-button _ngcontent-vlf-c84="" class="md button in-toolbar ion-activatable ion-focusable hydrated">
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-title _ngcontent-vlf-c84="" class="md title-default hydrated">Turmas
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -37,9 +42,15 @@
           </ion-col>
         </ion-row>
       </ion-grid> 
-      <ion-button fill="clear" slot="end" class="botao-direita">
+      <ion-button fill="clear" slot="end" class="botao-direita" (click)="editar(turma)">
         <ion-icon name="chevron-forward-outline"></ion-icon>
       </ion-button>     
     </ion-card-content>
   </ion-card>
+  
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="adicionar()" >
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
